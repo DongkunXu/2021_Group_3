@@ -12,3 +12,11 @@
 605	2737	6684883146593065	CMakeFiles/QtVTKExample.dir/mainwindow.cpp.obj	386d7f329821f71
 603	3166	6684883150884262	CMakeFiles/QtVTKExample.dir/main.cpp.obj	fda6152ba9eeecad
 3167	3520	6684883154352185	QtVTKExample.exe	f32afaaec1e8273c
+5	561	6684897653402540	QtVTKExample_autogen/timestamp	15f3aee0424c3dea
+5	561	6684897653402540	QtVTKExample_autogen/mocs_compilation.cpp	15f3aee0424c3dea
+5	561	6684897653402540	D:/GitHub/2021_Group_3/build-Qt_VTK_Project-Desktop_Qt_6_2_3_MSVC2019_64bit-Debug/QtVTKExample_autogen/timestamp	15f3aee0424c3dea
+5	561	6684897653402540	D:/GitHub/2021_Group_3/build-Qt_VTK_Project-Desktop_Qt_6_2_3_MSVC2019_64bit-Debug/QtVTKExample_autogen/mocs_compilation.cpp	15f3aee0424c3dea
+564	2646	6684897674823756	CMakeFiles/QtVTKExample.dir/QtVTKExample_autogen/mocs_compilation.cpp.obj	3788cc236486042a
+561	2994	6684897678285516	CMakeFiles/QtVTKExample.dir/mainwindow.cpp.obj	386d7f329821f71
+562	3388	6684897682229055	CMakeFiles/QtVTKExample.dir/main.cpp.obj	fda6152ba9eeecad
+3388	3581	6684897683907780	QtVTKExample.exe	f32afaaec1e8273c

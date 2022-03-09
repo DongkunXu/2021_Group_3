@@ -35,7 +35,6 @@
 #include <vtkShrinkFilter.h>
 #include <vtkPlane.h>
 #include <vtkClipDataSet.h>
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -53,10 +52,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi( this );
 
     ui->qvtkWidget->SetRenderWindow( renderWindow );			// note that vtkWidget is the name I gave to my QtVTKOpenGLWidget in Qt creator
-
     ui->saveButton->setIcon(QIcon(":/Icons/save.png"));
     ui->openButton->setIcon(QIcon(":/Icons/file.png"));
-
     ui->arrow->setIcon(QIcon(":/Icons/arrow.png"));
     ui->cone->setIcon(QIcon(":/Icons/slz.png"));
     ui->disk->setIcon(QIcon(":/Icons/disk.png"));
@@ -65,7 +62,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     connect( ui->BoxShrink, &QCheckBox::stateChanged, this, &::MainWindow::on_checkBox_stateChanged);
     connect( ui->BoxClip, &QCheckBox::stateChanged, this, &::MainWindow::on_checkBoxclip_stateChanged);
-
     connect( ui->Filter, &QPushButton::released, this, &::MainWindow::handlFilter );
 }
 
@@ -81,12 +77,10 @@ void MainWindow::on_checkBox_stateChanged()
            vtkNew<vtkShrinkFilter> shrink;
            shrink->SetInputConnection(cubeSource->GetOutputPort());
            shrink->SetShrinkFactor(S);
-
            vtkNew<vtkDataSetMapper> mapper;
            mapper->SetInputConnection(shrink->GetOutputPort());
            actor->SetMapper(mapper);
            actor->GetProperty()->SetColor( Red,Green,Blue );
-
            renderer->AddActor(actor);
        }
        if (shape == 2){
@@ -99,7 +93,6 @@ void MainWindow::on_checkBox_stateChanged()
            mapper->SetInputConnection(shrink->GetOutputPort());
            actor->SetMapper(mapper);
            actor->GetProperty()->SetColor( Red,Green,Blue );
-
            renderer->AddActor(actor);
        }
        if (shape == 3){
@@ -112,7 +105,6 @@ void MainWindow::on_checkBox_stateChanged()
            mapper->SetInputConnection(shrink->GetOutputPort());
            actor->SetMapper(mapper);
            actor->GetProperty()->SetColor( Red,Green,Blue );
-
            renderer->AddActor(actor);
        }
 
@@ -127,7 +119,6 @@ void MainWindow::on_checkBox_stateChanged()
 
 
        renderer->SetBackground( Red_B,Green_B,Blue_B );
-
        renderWindow->Render();
      }
    else if(ui->BoxShrink->isChecked() == false)
@@ -176,7 +167,6 @@ void MainWindow::on_checkBox_stateChanged()
 
        renderer->AddActor(actor);
        renderer->SetBackground( Red_B,Green_B,Blue_B );
-
        renderWindow->Render();
      }
 }
@@ -199,7 +189,6 @@ void MainWindow::on_checkBoxclip_stateChanged()
 
            actor->SetMapper(mapper);
            actor->GetProperty()->SetColor( Red,Green,Blue );
-
            renderer->AddActor(actor);
        }
        if (shape == 2){
@@ -214,7 +203,6 @@ void MainWindow::on_checkBoxclip_stateChanged()
 
            actor->SetMapper(mapper);
            actor->GetProperty()->SetColor( Red,Green,Blue );
-
            renderer->AddActor(actor);
        }
        if (shape == 3){
@@ -229,7 +217,6 @@ void MainWindow::on_checkBoxclip_stateChanged()
 
            actor->SetMapper(mapper);
            actor->GetProperty()->SetColor( Red,Green,Blue );
-
            renderer->AddActor(actor);
        }
 
@@ -245,13 +232,11 @@ void MainWindow::on_checkBoxclip_stateChanged()
 
            actor->SetMapper(mapper);
            actor->GetProperty()->SetColor( Red,Green,Blue );
-
            renderer->AddActor(actor);
 
        }
 
        renderer->SetBackground( Red_B,Green_B,Blue_B );
-
        renderWindow->Render();
      }
    else if(ui->BoxClip->isChecked() == false)
@@ -269,7 +254,6 @@ void MainWindow::on_checkBoxclip_stateChanged()
 
            actor->SetMapper(mapper);
            actor->GetProperty()->SetColor( Red,Green,Blue );
-
            renderer->AddActor(actor);
        }
        if (shape == 2){
@@ -284,7 +268,6 @@ void MainWindow::on_checkBoxclip_stateChanged()
 
            actor->SetMapper(mapper);
            actor->GetProperty()->SetColor( Red,Green,Blue );
-
            renderer->AddActor(actor);
        }
        if (shape == 3){
@@ -299,7 +282,6 @@ void MainWindow::on_checkBoxclip_stateChanged()
 
            actor->SetMapper(mapper);
            actor->GetProperty()->SetColor( Red,Green,Blue );
-
            renderer->AddActor(actor);
        }
 
@@ -315,72 +297,50 @@ void MainWindow::on_checkBoxclip_stateChanged()
 
            actor->SetMapper(mapper);
            actor->GetProperty()->SetColor( Red,Green,Blue );
-
            renderer->AddActor(actor);
 
        }
 
        actor->GetProperty()->SetColor( Red,Green,Blue );
-
        renderer->AddActor(actor);
        renderer->SetBackground( Red_B,Green_B,Blue_B );
-
        renderWindow->Render();
      }
 }
 
 
 void MainWindow::on_disk_triggered() {
-
     shape = 1;
-
     vtkSmartPointer<vtkSphereSource> cubeSource = vtkSmartPointer<vtkSphereSource>::New();
-
     vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
     mapper->SetInputConnection( cubeSource->GetOutputPort() );
-
     actor->SetMapper(mapper);
     actor->GetProperty()->EdgeVisibilityOn();
-
     vtkSmartPointer<vtkNamedColors> colors = vtkSmartPointer<vtkNamedColors>::New();
     actor->GetProperty()->SetColor( Red,Green,Blue );
-
     randerbegan(actor);
 
 }
 
 void MainWindow::on_arrow_triggered() {
-
     shape = 2;
-
     vtkSmartPointer<vtkArrowSource> cubeSource = vtkSmartPointer<vtkArrowSource>::New();
-
-    // Create a mapper that will hold the cube's geometry in a format suitable for rendering
     vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
     mapper->SetInputConnection( cubeSource->GetOutputPort() );
-
     actor->SetMapper(mapper);
     actor->GetProperty()->EdgeVisibilityOn();
-
     vtkSmartPointer<vtkNamedColors> colors = vtkSmartPointer<vtkNamedColors>::New();
     actor->GetProperty()->SetColor( Red,Green,Blue );
-
     randerbegan(actor);
 }
 
 void MainWindow::on_cone_triggered() {
-
     shape = 3;
-
     vtkSmartPointer<vtkConeSource> cubeSource = vtkSmartPointer<vtkConeSource>::New();
-
-    // Create a mapper that will hold the cube's geometry in a format suitable for rendering
     vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
     mapper->SetInputConnection( cubeSource->GetOutputPort() );
-
     actor->SetMapper(mapper);
     actor->GetProperty()->EdgeVisibilityOn();
-
     vtkSmartPointer<vtkNamedColors> colors = vtkSmartPointer<vtkNamedColors>::New();
     actor->GetProperty()->SetColor( Red,Green,Blue );
     randerbegan(actor);
@@ -389,33 +349,23 @@ void MainWindow::on_cone_triggered() {
 
 void MainWindow::on_ColorChoose_triggered() {
     ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );			// ###### ask the QtVTKOpenGLWidget for its renderWindow ######
-
-    // Add the actor to the scene
     renderer->AddActor(actor);
     QColor ColourDialog = QColorDialog::getColor();
-
     Red_B=ColourDialog.redF();
     Green_B=ColourDialog.greenF();
     Blue_B=ColourDialog.blueF();
-
     renderer->SetBackground( Red_B,Green_B,Blue_B );
-
     renderWindow->Render();
 }
 
 void MainWindow::on_Color_triggered() {
     ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );			// ###### ask the QtVTKOpenGLWidget for its renderWindow ######
-
-    // Add the actor to the scene
     renderer->AddActor(actor);
     QColor ColourDialog = QColorDialog::getColor();
-
     Red=ColourDialog.redF();
     Green=ColourDialog.greenF();
     Blue=ColourDialog.blueF();
-
     actor->GetProperty()->SetColor( Red,Green,Blue );
-
     renderWindow->Render();
 }
 
@@ -425,19 +375,14 @@ void MainWindow::on_openButton_triggered()
     shape = 0;
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
-
     vtkNew<vtkPolyDataMapper> mapper;
     mapper->SetInputConnection(reader->GetOutputPort());
-
     QByteArray ba = fileName.toLocal8Bit();
-
     const char *c_str2 = ba.data();
     reader->SetFileName(c_str2);
     reader->Update();
-
     actor->SetMapper(mapper);
     actor->GetProperty()->SetColor( Red,Green,Blue );
-
     randerbegan(actor);
 }
 
@@ -447,8 +392,6 @@ void MainWindow::on_saveButton_triggered()
     QString fileName = QFileDialog::getSaveFileName(this, tr(""),"",tr("Text files (*.stl )"));
 
     QFile file(fileName);
-    //currentFile = fileName;
-    //setWindowTitle(fileName);
     file.open( QIODevice::ReadWrite );
     QTextStream out(&file);
 

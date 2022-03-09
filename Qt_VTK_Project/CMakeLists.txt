@@ -10,6 +10,13 @@ endforeach()
 
 PROJECT( QtVTKExample )
 
+if(WIN64)
+set(CPACK_GENERATOR "NSIS")
+else()
+set(CPACK_GENERATOR "ZIP")
+endif()
+include(CPack)
+
 # The CMake build process might generate some new files in the current
 # directory. This makes sure they can be found.
 set( CMAKE_INCLUDE_CURRENT_DIR ON )

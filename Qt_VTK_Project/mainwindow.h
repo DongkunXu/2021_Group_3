@@ -47,6 +47,7 @@ private:
     vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
     //vtkSmartPointer<vtkPlane> planeLeft;
 
+
 public slots:
 
     void on_saveButton_triggered();
