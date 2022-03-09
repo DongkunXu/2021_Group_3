@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
     ui->setupUi( this );
 
-    ui->qvtkWidget->SetRenderWindow( renderWindow );			// note that vtkWidget is the name I gave to my QtVTKOpenGLWidget in Qt creator
+    ui->qvtkWidget->SetRenderWindow( renderWindow );
     ui->saveButton->setIcon(QIcon(":/Icons/save.png"));
     ui->openButton->setIcon(QIcon(":/Icons/file.png"));
     ui->arrow->setIcon(QIcon(":/Icons/arrow.png"));
