@@ -2,6 +2,10 @@
 
 #C++ GITGNORE
 
+#Build Folder
+build-Qt_VTK_Project-Desktop_Qt_6_2_3_MSVC2019_64bit-Debug/*
+
+
 #additional files that were found
 *.vcxproj
 *.vcxproj.filters
