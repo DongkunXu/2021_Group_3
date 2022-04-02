@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 
 foreach(p
     CMP0071 # 3.10: Let AUTOMOC and AUTOUIC process GENERATED files
@@ -10,17 +10,6 @@ endforeach()
 
 PROJECT( QtVTKExample )
 
-if(WIN64)
-set(CPACK_GENERATOR "NSIS")
-else()
-set(CPACK_GENERATOR "ZIP")
-endif()
-include(CPack)
-
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 # The CMake build process might generate some new files in the current
 # directory. This makes sure they can be found.
 set( CMAKE_INCLUDE_CURRENT_DIR ON )
@@ -52,6 +41,10 @@ add_executable( QtVTKExample MACOSX_BUNDLE
 				main.cpp mainwindow.cpp 
 				mainwindow.h 
 				mainwindow.ui
+                                                                    filter.cpp
+                                                                    filter.h
+                                                                    ModelRender.cpp
+                                                                    ModelRender.h
 				${UI_Srcs}
 				${QRC_Srcs}
 				)
