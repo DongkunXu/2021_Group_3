@@ -1,5 +1,6 @@
 #include "filter.h"
 
+
 filter::filter(){
 
     reflectfilter=vtkSmartPointer<vtkReflectionFilter>::New();
@@ -23,6 +24,19 @@ filter::filter(){
     removemapper = vtkSmartPointer<vtkPolyDataMapper>::New();
     removepolydata=vtkSmartPointer<vtkPolyData>::New();
 
+    trianglefilter = vtkSmartPointer<vtkTriangleFilter>::New();
+    calcFA = vtkSmartPointer< vtkMassProperties >::New();
+    calcFV = vtkSmartPointer< vtkMassProperties >::New();
+
+    shrinkfilter = vtkSmartPointer<vtkShrinkFilter>::New();
+    shrinkpolydata = vtkSmartPointer<vtkPolyData>::New();
+    shrinkdataset =vtkSmartPointer<vtkDataSetMapper>::New();
+
+    clipfilter=vtkSmartPointer<vtkClipDataSet> ::New();
+    clipdataset=vtkSmartPointer<vtkDataSetMapper> ::New();
+
+    //transform=vtkSmartPointer<vtkTransform>::New();
+    //transpolydata=vtkSmartPointer<vtkPolyData>::New();
 }
 
 void filter::reflect(ModelRender *ReflectModel){
@@ -47,11 +61,35 @@ void filter::reflect(ModelRender *ReflectModel){
     ReflectModel->getRenderWindow()->Render();
 }
 
+double filter::calcA(ModelRender* calcModel)
+{
+    trianglefilter->SetInputData(calcModel->getPolyData());
+    trianglefilter->Update();
+
+    calcFA->SetInputData(trianglefilter->GetOutput());
+    calcFA->Update();
+
+    area = calcFA->GetVolume();
+    return area;
+}
+
+double filter::calcV(ModelRender* calcModel)
+{
+    trianglefilter->SetInputData(calcModel->getPolyData());
+    trianglefilter->Update();
+
+    calcFV->SetInputData(trianglefilter->GetOutput());
+    calcFV->Update();
+
+    vol = calcFV->GetSurfaceArea();
+    return vol;
+}
 
 void filter::outLine(ModelRender* OutlineModel){
     outlinepolydata=OutlineModel->getPolyData();
     outlinefilter->SetInputData(outlinepolydata);
     outlinefilter->Update();
+
     outlinemapper->SetInputConnection(outlinefilter->GetOutputPort());
     outlineactor->SetMapper(outlinemapper);
     outlineactor->GetProperty()->SetColor(0,0,1);
@@ -87,8 +125,6 @@ void filter::smooth(ModelRender *SmoothModel){
 
 void filter::smoothadd(ModelRender *SmoothModel){
 
-    //SmoothModel->getRenderer()->RemoveAllViewProps();
-
     smoothdelaunay->SetInputData(SmoothModel->getPolyData());
     smoothdelaunay->Update();
     smoothfilter->SetInputConnection(smoothdelaunay->GetOutputPort());
@@ -109,15 +145,67 @@ void filter::smoothadd(ModelRender *SmoothModel){
     SmoothModel->getRenderWindow()->Render();
 }
 
+void filter::shrinkFilter(ModelRender *ShrinkModel){
+   shrinkpolydata=ShrinkModel->getPolyData();
+   shrinkfilter->SetInputData(shrinkpolydata);
+
+   shrinkfilter->SetShrinkFactor(.5);
+
+   shrinkfilter->Update();
+   shrinkdataset->SetInputConnection(shrinkfilter->GetOutputPort());
+   ShrinkModel->getActor()->SetMapper(shrinkdataset);
+
+   ShrinkModel->getRenderer()->AddActor(ShrinkModel->getActor());
+   ShrinkModel->getRenderWindow()->Render();
+}
+
+void filter::clipFilter(ModelRender *ClipModel){
+    vtkSmartPointer<vtkPlane>plane=vtkSmartPointer<vtkPlane>::New();
+    plane ->SetOrigin(ClipModel->getPolyData()->GetCenter());
+    plane->SetNormal(0.0,-1.0,0.0);
+    clipfilter->SetInputData(ClipModel->getPolyData());
+    clipfilter->SetClipFunction(plane.Get());
+    clipfilter->Update();
+    clipdataset->SetInputConnection(clipfilter->GetOutputPort());
+    ClipModel->getActor()->SetMapper(clipdataset);
+    ClipModel->getRenderer()->AddActor(ClipModel->getActor());
+    ClipModel->getRenderWindow()->Render();
+}
+
+/*void filter::trans(ModelRender *transModel,int x,int y,int z){
+    transpolydata=transModel->getPolyData();
+    transform->RotateX(x);
+    transform->RotateY(y);
+    transform->RotateZ(z);
+
+    transModel->SetTransform(transform);
+
+    shrinkdataset->SetInputConnection(shrinkfilter->GetOutputPort());
+    ShrinkModel->getActor()->SetMapper(shrinkdataset);
+
+    ShrinkModel->getRenderer()->AddActor(ShrinkModel->getActor());
+    ShrinkModel->getRenderWindow()->Render();
+}*/
+
 void filter::RemoveFilter(ModelRender *removeModel){
-
     removeModel->getRenderer()->RemoveAllViewProps();
-    /*
-    removepolydata=removeModel->getPolyData();
-    removemapper->SetInputConnection(removepolydata->GetOutputPort());
-
-    removeactor->SetMapper(removemapper);
-    removeModel->getRenderer()->AddActor(removeactor);
-    removeModel->getRenderWindow()->Render();*/
     removeModel->RenderingStarts();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
