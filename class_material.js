@@ -9,7 +9,7 @@ var class_material =
     [ "get_ID", "class_material.html#a6ab6e0af298de65d1fadecc746222f0c", null ],
     [ "get_Name", "class_material.html#aa300f994707768184465ffeea85061c1", null ],
     [ "operator=", "class_material.html#a977dbde401c722d810dea523bd2a53c0", null ],
-    [ "set_Coluour", "class_material.html#a7da7932a8653fb54c53622469ee1fe8c", null ],
+    [ "set_Colour", "class_material.html#a258a039384d354485d46ef174840fd29", null ],
     [ "set_Density", "class_material.html#a1dec0b7306fe536c1c33a94debecd5a0", null ],
     [ "set_ID", "class_material.html#a8aa0493906bb67da66c4ae727535cc01", null ],
     [ "set_Name", "class_material.html#a110dd67646e03aa3384962e46a987403", null ]

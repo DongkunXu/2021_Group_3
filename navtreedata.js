@@ -22,15 +22,13 @@ for the JavaScript code in this file
 */
 var NAVTREE =
 [
-  [ "2021_Group_3", "index.html", [
-    [ "2021_Group_3", "md__r_e_a_d_m_e.html", [
-      [ "Task", "md__r_e_a_d_m_e.html#autotoc_md4", null ]
+  [ "3D Model Viewer", "index.html", [
+    [ "2021_Group_3", "index.html", [
+      [ "Task", "index.html#autotoc_md1", null ]
     ] ],
-    [ "TEAM", "md__t_e_a_m.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
-      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ]
@@ -44,8 +42,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"3_d___vector_8h_source.html",
-"pages.html"
+"3_d___vector_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
