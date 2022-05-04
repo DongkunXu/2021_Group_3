@@ -1,3 +1,6 @@
+
+This is an old, unupdated repo. For updated work, please visit: https://github.com/ejagombar/2021_Group_3/tree/Version2
+
 # 2021_Group_3
 
 A 3D model viewer designed to run on Windows, MacOS and Linux able to render and perform basic manipulation to .stl files and custom .mod files.
