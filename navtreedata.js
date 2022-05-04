@@ -23,7 +23,7 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "3D Model Viewer", "index.html", [
-    [ "2021_Group_3", "index.html", [
+    [ "2021_Group_3", "index.html#autotoc_md0", [
       [ "Task", "index.html#autotoc_md1", null ]
     ] ],
     [ "Classes", "annotated.html", [
